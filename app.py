@@ -36,7 +36,7 @@ h1,h2,h3 {
 # ---------------- LOAD DATA ----------------
 @st.cache_data
 def load_data():
-   return pd.read_csv("StudentsPerformance.csv")
+ pd.read_csv("csv00")
 df = load_data()
 
 # ---------------- FEATURE ENGINEERING ----------------
