@@ -34,13 +34,27 @@ h1,h2,h3 {
 """, unsafe_allow_html=True)
 
 # ---------------- LOAD DATA ----------------
+# ---------------- LOAD DATA ----------------
 @st.cache_data
 def load_data():
- pd.read_csv("csv00")
-st.write(df.head())
-st.write(df.columns)
-st.write(df.dtypes)
+    try:
+        return pd.read_csv("csv00")   # agar file ka naam csv00.csv hai to yahan csv00.csv likhein
+    except Exception as e:
+        st.error(f"Error loading file: {e}")
+        return pd.DataFrame()
+
 df = load_data()
+
+# Agar data load na ho to app yahin ruk jaye
+if df.empty:
+    st.stop()
+
+# Debug (temporary - baad mein hata sakte hain)
+st.write("Columns:", list(df.columns))
+st.write("Data Types:")
+st.write(df.dtypes)
+st.write("First 5 Rows:")
+st.write(df.head())
 
 # ---------------- FEATURE ENGINEERING ----------------
 df["average_score"] = (
