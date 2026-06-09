@@ -66,15 +66,17 @@ df["performance"] = pd.cut(
 # ---------------- HEADER ----------------
 st.markdown("""
 <div style="
-padding:25px;
-border-radius:15px;
-background:linear-gradient(90deg,#4F46E5,#06B6D4);
+padding:30px;
+border-radius:20px;
+background:linear-gradient(135deg,#1E3A8A,#06B6D4);
 text-align:center;
 color:white;
-margin-bottom:20px;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+margin-bottom:25px;
 ">
 <h1>🎓 Student Performance Analytics Dashboard</h1>
-<p>Interactive Analysis of Student Exam Performance</p>
+<h4>Advanced Student Performance Insights & Analytics</h4>
+<p>Interactive Dashboard for Academic Performance Evaluation</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -127,7 +129,7 @@ filtered_df = df[
 ]
 
 # ---------------- KPIs ----------------
-st.subheader("📌 KPI Summary")
+st.markdown("## 📊 Executive Summary")
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
