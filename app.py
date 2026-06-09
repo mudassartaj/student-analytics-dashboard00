@@ -37,6 +37,9 @@ h1,h2,h3 {
 @st.cache_data
 def load_data():
  pd.read_csv("csv00")
+st.write(df.head())
+st.write(df.columns)
+st.write(df.dtypes)
 df = load_data()
 
 # ---------------- FEATURE ENGINEERING ----------------
