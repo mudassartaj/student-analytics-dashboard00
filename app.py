@@ -36,8 +36,7 @@ h1,h2,h3 {
 # ---------------- LOAD DATA ----------------
 @st.cache_data
 def load_data():
-    return pd.read_csv("data/StudentsPerformance.csv")
-
+    return pd.read_csv("/mount/src/student-analytics-dashboard00/data/StudentsPerformance.csv")
 df = load_data()
 
 # ---------------- FEATURE ENGINEERING ----------------
