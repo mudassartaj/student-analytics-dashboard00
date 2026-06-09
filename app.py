@@ -50,12 +50,6 @@ if df.empty:
     st.stop()
 
 # Debug (temporary - baad mein hata sakte hain)
-st.write("Columns:", list(df.columns))
-st.write("Data Types:")
-st.write(df.dtypes)
-st.write("First 5 Rows:")
-st.write(df.head())
-
 # ---------------- FEATURE ENGINEERING ----------------
 df["average_score"] = (
     df["math score"] +
