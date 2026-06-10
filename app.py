@@ -20,49 +20,24 @@ BG = "#0F172A"
 CARD = "#1E293B"
 TEXT = "#F8FAFC"
 # ---------------- CUSTOM CSS ----------------
+
 st.markdown("""
 <style>
-.main {
-    background-color: #0E1117;
-}
 
-.kpi-card {
-    background: linear-gradient(135deg,#4F46E5,#06B6D4);
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    color: white;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-h1,h2,h3 {
-    color: white;
-}
-</style>
-""", unsafe_allow_html=True
 .main{
     background-color:#0F172A;
 }
 
-.stApp{
-    background-color:#0F172A;
-}
-
 .kpi-card{
-    background:linear-gradient(135deg,#6366F1,#06B6D4);
-    border-radius:15px;
+    background: linear-gradient(135deg,#6366F1,#06B6D4);
     padding:20px;
+    border-radius:15px;
     color:white;
     box-shadow:0 0 25px rgba(99,102,241,.4);
 }
 
-.kpi-card:hover{
-    transform:translateY(-4px);
-}
-
-h1,h2,h3{
-    color:white;
-})
+</style>
+""", unsafe_allow_html=True)
 # ---------------- LOAD DATA ----------------
 # ---------------- LOAD DATA ----------------
 @st.cache_data
