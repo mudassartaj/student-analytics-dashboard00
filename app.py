@@ -69,22 +69,38 @@ df["performance"] = pd.cut(
 )
 
 # ---------------- HEADER ----------------
+# ---------------- HEADER ----------------
 st.markdown("""
 <div style="
-padding:30px;
+padding:35px;
 border-radius:20px;
-background:linear-gradient(135deg,#1E3A8A,#06B6D4);
+background:linear-gradient(135deg,#1E3A8A,#06B6D4,#10B981);
 text-align:center;
 color:white;
 box-shadow:0 8px 20px rgba(0,0,0,0.3);
 margin-bottom:25px;
 ">
+
 <h1>🎓 Student Performance Analytics Dashboard</h1>
-<h4>Advanced Student Performance Insights & Analytics</h4>
-<p>Interactive Dashboard for Academic Performance Evaluation</p>
+
+<h3>Advanced Student Performance Insights & Analytics</h3>
+
+<p style="font-size:18px;">
+Interactive Dashboard for Academic Performance Evaluation
+</p>
+
+<hr style="border:1px solid rgba(255,255,255,0.3);">
+
+<p style="font-size:18px;">
+👨‍💻 <b>Developed By:</b> Mudassar Taj
+</p>
+
+<p style="font-size:15px;">
+🚀 Python | Streamlit | Plotly | Data Analytics
+</p>
+
 </div>
 """, unsafe_allow_html=True)
-
 # ---------------- SIDEBAR ----------------
 st.sidebar.image(
     "https://cdn-icons-png.flaticon.com/512/3135/3135755.png",
