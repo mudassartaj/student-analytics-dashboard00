@@ -395,11 +395,49 @@ st.plotly_chart(fig, use_container_width=True)
 # ---------------- AREA CHART ----------------
 st.subheader("📈 Score Trends")
 
-area_data = filtered_df[
-    ["math score","reading score","writing score"]
-]
+trend_df = filtered_df[[
+    "math score",
+    "reading score",
+    "writing score"
+]]
 
-st.area_chart(area_data)
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    y=trend_df["math score"],
+    mode="lines",
+    fill="tozeroy",
+    name="Math",
+    line=dict(color="#3B82F6", width=3)
+))
+
+fig.add_trace(go.Scatter(
+    y=trend_df["reading score"],
+    mode="lines",
+    fill="tozeroy",
+    name="Reading",
+    line=dict(color="#10B981", width=3)
+))
+
+fig.add_trace(go.Scatter(
+    y=trend_df["writing score"],
+    mode="lines",
+    fill="tozeroy",
+    name="Writing",
+    line=dict(color="#EC4899", width=3)
+))
+
+fig.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="#1E293B",
+    plot_bgcolor="#1E293B",
+    font=dict(color="white"),
+    title="📈 Student Score Trends",
+    xaxis_title="Student Index",
+    yaxis_title="Score"
+)
+
+st.plotly_chart(fig, use_container_width=True)
 
 # ---------------- TOP STUDENTS ----------------
 st.subheader("🏆 Top 10 Students")
