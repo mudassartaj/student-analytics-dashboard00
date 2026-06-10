@@ -443,7 +443,7 @@ st.plotly_chart(fig, use_container_width=True)
 # ---------------- TOP 10 STUDENTS ----------------
 st.subheader("🏆 Top 10 Students Leaderboard")
 
-# Top 10 students
+# Top 10 students based on average score
 top_students = (
     filtered_df
     .sort_values(by="average_score", ascending=False)
@@ -451,17 +451,26 @@ top_students = (
     .copy()
 )
 
-# Rank
+# Add Rank column
 top_students.insert(0, "Rank", range(1, len(top_students) + 1))
 
-# Medal
-top_students["Medal"] = top_students["Rank"].map({
-    1: "🥇 Gold",
-    2: "🥈 Silver",
-    3: "🥉 Bronze"
-}).fillna("🏅")
+# Add Medal column
+def get_medal(rank):
+    if rank == 1:
+        return "🥇 Gold"
+    elif rank == 2:
+        return "🥈 Silver"
+    elif rank == 3:
+        return "🥉 Bronze"
+    else:
+        return "🏅"
 
-# Sirf important columns show karein
+top_students["Medal"] = top_students["Rank"].apply(get_medal)
+
+# Round average score
+top_students["average_score"] = top_students["average_score"].round(2)
+
+# Select columns to display
 display_df = top_students[
     [
         "Rank",
@@ -475,20 +484,44 @@ display_df = top_students[
     ]
 ]
 
-# Round average score
-display_df["average_score"] = display_df["average_score"].round(2)
+# Summary Cards
+col1, col2, col3 = st.columns(3)
 
-# Styled table
-st.dataframe(
-    display_df.style
-    .background_gradient(
-        subset=["average_score"],
-        cmap="viridis"
+with col1:
+    st.metric(
+        "🥇 Highest Score",
+        f"{filtered_df['average_score'].max():.2f}"
     )
-    .format({
-        "average_score": "{:.2f}"
-    }),
-    use_container_width=True
+
+with col2:
+    st.metric(
+        "📊 Class Average",
+        f"{filtered_df['average_score'].mean():.2f}"
+    )
+
+with col3:
+    st.metric(
+        "👨‍🎓 Top Students",
+        len(display_df)
+    )
+
+st.markdown("---")
+
+# Display leaderboard
+st.dataframe(
+    display_df,
+    use_container_width=True,
+    hide_index=True
+)
+
+# Optional download button
+csv_top = display_df.to_csv(index=False).encode("utf-8")
+
+st.download_button(
+    label="⬇ Download Top 10 Students",
+    data=csv_top,
+    file_name="top_10_students.csv",
+    mime="text/csv"
 )
 # ---------------- DOWNLOAD BUTTON ----------------
 csv = filtered_df.to_csv(index=False).encode("utf-8")
