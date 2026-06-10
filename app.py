@@ -376,8 +376,8 @@ corr = filtered_df[
 
 fig = px.imshow(
     corr,
-    text_auto=".2f",                    # 2 decimal places
-    color_continuous_scale="Viridis",   # Beautiful color theme
+    text_auto=".2f",
+    color_continuous_scale="Viridis",
     aspect="auto",
     title="📊 Correlation Between Subjects"
 )
@@ -386,13 +386,8 @@ fig.update_layout(
     template="plotly_dark",
     paper_bgcolor="#1E293B",
     plot_bgcolor="#1E293B",
-    font=dict(color="white", size=14),
-    title_font=dict(size=20),
-    coloraxis_colorbar=dict(
-        title="Correlation",
-        tickfont=dict(color="white"),
-        titlefont=dict(color="white")
-    )
+    font=dict(color="white"),
+    title_font=dict(size=20)
 )
 
 st.plotly_chart(fig, use_container_width=True)
