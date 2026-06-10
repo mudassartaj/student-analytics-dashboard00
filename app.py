@@ -233,27 +233,66 @@ with c2:
 
     st.plotly_chart(fig, use_container_width=True)
 # ---------------- CHARTS ROW 2 ----------------
+# ---------------- CHARTS ROW 2 ----------------
 c1, c2 = st.columns(2)
 
+# ---------- Histogram ----------
 with c1:
     fig = px.histogram(
         filtered_df,
         x="math score",
-        nbins=20,
-        title="Math Score Distribution"
+        nbins=25,
+        color_discrete_sequence=["#06B6D4"],
+        title="📈 Math Score Distribution"
     )
+
+    fig.update_traces(
+        marker_line_color="white",
+        marker_line_width=1.5
+    )
+
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="#1E293B",
+        plot_bgcolor="#1E293B",
+        font=dict(color="white"),
+        title_font=dict(size=20),
+        xaxis_title="Math Score",
+        yaxis_title="Number of Students"
+    )
+
     st.plotly_chart(fig, use_container_width=True)
 
+# ---------- Box Plot ----------
 with c2:
     fig = px.box(
         filtered_df,
         x="gender",
         y="writing score",
         color="gender",
-        title="Writing Score Distribution"
+        color_discrete_map={
+            "female": "#EC4899",   # Pink
+            "male": "#3B82F6"      # Blue
+        },
+        title="✍️ Writing Score Distribution by Gender"
     )
-    st.plotly_chart(fig, use_container_width=True)
 
+    fig.update_traces(
+        marker=dict(size=6),
+        line=dict(width=2)
+    )
+
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="#1E293B",
+        plot_bgcolor="#1E293B",
+        font=dict(color="white"),
+        title_font=dict(size=20),
+        xaxis_title="Gender",
+        yaxis_title="Writing Score"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 # ---------------- CHARTS ROW 3 ----------------
 c1, c2 = st.columns(2)
 
