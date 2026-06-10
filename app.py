@@ -440,15 +440,56 @@ fig.update_layout(
 st.plotly_chart(fig, use_container_width=True)
 
 # ---------------- TOP STUDENTS ----------------
-st.subheader("🏆 Top 10 Students")
+# ---------------- TOP 10 STUDENTS ----------------
+st.subheader("🏆 Top 10 Students Leaderboard")
 
-top_students = filtered_df.sort_values(
-    by="average_score",
-    ascending=False
-).head(10)
+# Top 10 students
+top_students = (
+    filtered_df
+    .sort_values(by="average_score", ascending=False)
+    .head(10)
+    .copy()
+)
 
-st.dataframe(top_students, use_container_width=True)
+# Rank
+top_students.insert(0, "Rank", range(1, len(top_students) + 1))
 
+# Medal
+top_students["Medal"] = top_students["Rank"].map({
+    1: "🥇 Gold",
+    2: "🥈 Silver",
+    3: "🥉 Bronze"
+}).fillna("🏅")
+
+# Sirf important columns show karein
+display_df = top_students[
+    [
+        "Rank",
+        "Medal",
+        "gender",
+        "math score",
+        "reading score",
+        "writing score",
+        "average_score",
+        "performance"
+    ]
+]
+
+# Round average score
+display_df["average_score"] = display_df["average_score"].round(2)
+
+# Styled table
+st.dataframe(
+    display_df.style
+    .background_gradient(
+        subset=["average_score"],
+        cmap="viridis"
+    )
+    .format({
+        "average_score": "{:.2f}"
+    }),
+    use_container_width=True
+)
 # ---------------- DOWNLOAD BUTTON ----------------
 csv = filtered_df.to_csv(index=False).encode("utf-8")
 
