@@ -367,16 +367,32 @@ with c2:
     st.plotly_chart(fig, use_container_width=True)
 
 # ---------------- HEATMAP ----------------
+# ---------------- HEATMAP ----------------
 st.subheader("🔥 Correlation Heatmap")
 
 corr = filtered_df[
-    ["math score","reading score","writing score"]
+    ["math score", "reading score", "writing score"]
 ].corr()
 
 fig = px.imshow(
     corr,
-    text_auto=True,
-    color_continuous_scale="RdBu_r"
+    text_auto=".2f",                    # 2 decimal places
+    color_continuous_scale="Viridis",   # Beautiful color theme
+    aspect="auto",
+    title="📊 Correlation Between Subjects"
+)
+
+fig.update_layout(
+    template="plotly_dark",
+    paper_bgcolor="#1E293B",
+    plot_bgcolor="#1E293B",
+    font=dict(color="white", size=14),
+    title_font=dict(size=20),
+    coloraxis_colorbar=dict(
+        title="Correlation",
+        tickfont=dict(color="white"),
+        titlefont=dict(color="white")
+    )
 )
 
 st.plotly_chart(fig, use_container_width=True)
