@@ -294,33 +294,74 @@ with c2:
 
     st.plotly_chart(fig, use_container_width=True)
 # ---------------- CHARTS ROW 3 ----------------
+# ---------------- CHARTS ROW 3 ----------------
 c1, c2 = st.columns(2)
 
+# ---------- Scatter Plot ----------
 with c1:
     fig = px.scatter(
         filtered_df,
         x="math score",
         y="reading score",
-        color="gender",
+        color="average_score",
         size="writing score",
         hover_data=["average_score"],
-        title="Math vs Reading Score"
+        color_continuous_scale="Turbo",
+        title="📊 Math vs Reading Performance"
     )
+
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="#1E293B",
+        plot_bgcolor="#1E293B",
+        font=dict(color="white"),
+        title_font=dict(size=20),
+        xaxis_title="Math Score",
+        yaxis_title="Reading Score",
+        coloraxis_colorbar=dict(title="Average")
+    )
+
     st.plotly_chart(fig, use_container_width=True)
 
+# ---------- Performance Categories ----------
 with c2:
+
     performance_count = (
         filtered_df["performance"]
         .value_counts()
         .reset_index()
     )
 
+    performance_count.columns = ["performance", "count"]
+
     fig = px.bar(
         performance_count,
         x="performance",
         y="count",
         color="performance",
-        title="Performance Categories"
+        text="count",
+        color_discrete_map={
+            "Poor": "#EF4444",        # Red
+            "Good": "#F59E0B",        # Orange
+            "Excellent": "#10B981"   # Green
+        },
+        title="🏆 Performance Categories"
+    )
+
+    fig.update_traces(
+        marker_line_color="white",
+        marker_line_width=2,
+        textposition="outside"
+    )
+
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="#1E293B",
+        plot_bgcolor="#1E293B",
+        font=dict(color="white"),
+        title_font=dict(size=20),
+        xaxis_title="Performance",
+        yaxis_title="Number of Students"
     )
 
     st.plotly_chart(fig, use_container_width=True)
