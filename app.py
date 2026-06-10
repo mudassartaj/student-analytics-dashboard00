@@ -79,7 +79,9 @@ margin-bottom:25px;
 <p>Interactive Dashboard for Academic Performance Evaluation</p>
 </div>
 """, unsafe_allow_html=True)
+from datetime import datetime
 
+st.caption(f"Last Updated: {datetime.now().strftime('%d %B %Y | %I:%M %p')}")
 # ---------------- SIDEBAR ----------------
 st.sidebar.image(
     "https://cdn-icons-png.flaticon.com/512/3135/3135755.png",
