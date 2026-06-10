@@ -166,25 +166,72 @@ col5.metric("🏆 Avg Overall", round(filtered_df["average_score"].mean(),1))
 st.divider()
 
 # ---------------- CHARTS ROW 1 ----------------
+# ---------------- CHARTS ROW 1 ----------------
 c1, c2 = st.columns(2)
+
+# ---------- Bar Chart ----------
 with c1:
-fig = px.bar(
-    filtered_df.groupby("gender")["math score"]
-    .mean()
-    .reset_index(),
-    x="gender",
-    y="math score",
-    color="gender",
-    title="Average Math Score by Gender" )
-st.plotly_chart(fig, use_container_width=True)
+    fig = px.bar(
+        filtered_df.groupby("gender")["math score"]
+        .mean()
+        .reset_index(),
+        x="gender",
+        y="math score",
+        color="gender",
+        color_discrete_map={
+            "female": "#EC4899",   # Pink
+            "male": "#3B82F6"      # Blue
+        },
+        text_auto=".1f",
+        title="📊 Average Math Score by Gender"
+    )
+
+    fig.update_traces(
+        marker_line_color="white",
+        marker_line_width=2,
+        textposition="outside"
+    )
+
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="#1E293B",
+        plot_bgcolor="#1E293B",
+        font=dict(color="white"),
+        title_font=dict(size=20),
+        xaxis_title="Gender",
+        yaxis_title="Average Math Score"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+# ---------- Donut Chart ----------
 with c2:
     fig = px.pie(
         filtered_df,
         names="gender",
-        title="Gender Distribution"
+        hole=0.55,   # Donut effect
+        color="gender",
+        color_discrete_map={
+            "female": "#EC4899",   # Pink
+            "male": "#3B82F6"      # Blue
+        },
+        title="👥 Gender Distribution"
     )
-    st.plotly_chart(fig, use_container_width=True)
 
+    fig.update_traces(
+        textposition="inside",
+        textinfo="percent+label"
+    )
+
+    fig.update_layout(
+        template="plotly_dark",
+        paper_bgcolor="#1E293B",
+        plot_bgcolor="#1E293B",
+        font=dict(color="white"),
+        title_font=dict(size=20)
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
 # ---------------- CHARTS ROW 2 ----------------
 c1, c2 = st.columns(2)
 
