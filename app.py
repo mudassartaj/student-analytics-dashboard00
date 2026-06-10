@@ -40,7 +40,29 @@ h1,h2,h3 {
 }
 </style>
 """, unsafe_allow_html=True)
+.main{
+    background-color:#0F172A;
+}
 
+.stApp{
+    background-color:#0F172A;
+}
+
+.kpi-card{
+    background:linear-gradient(135deg,#6366F1,#06B6D4);
+    border-radius:15px;
+    padding:20px;
+    color:white;
+    box-shadow:0 0 25px rgba(99,102,241,.4);
+}
+
+.kpi-card:hover{
+    transform:translateY(-4px);
+}
+
+h1,h2,h3{
+    color:white;
+}
 # ---------------- LOAD DATA ----------------
 # ---------------- LOAD DATA ----------------
 @st.cache_data
