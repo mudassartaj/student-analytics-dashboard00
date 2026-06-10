@@ -168,17 +168,20 @@ st.divider()
 # ---------------- CHARTS ROW 1 ----------------
 c1, c2 = st.columns(2)
 
-with c1:
-    fig = px.bar(
-        filtered_df.groupby("gender")["math score"]
-        .mean()
-        .reset_index(),
-        x="gender",
-        y="math score",
-        color="gender",
-        title="Average Math Score by Gender"
-    )
-    st.plotly_chart(fig, use_container_width=True)
+fig = px.pie(
+    filtered_df,
+    names="gender",
+    hole=0.55,
+    color="gender",
+    color_discrete_map={
+        "female":"#EC4899",
+        "male":"#3B82F6"
+    }
+)
+
+fig.update_traces(
+    textinfo="percent+label"
+)
 
 with c2:
     fig = px.pie(
