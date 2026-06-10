@@ -39,7 +39,7 @@ h1,h2,h3 {
     color: white;
 }
 </style>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html=True
 .main{
     background-color:#0F172A;
 }
@@ -62,7 +62,7 @@ h1,h2,h3 {
 
 h1,h2,h3{
     color:white;
-}
+})
 # ---------------- LOAD DATA ----------------
 # ---------------- LOAD DATA ----------------
 @st.cache_data
