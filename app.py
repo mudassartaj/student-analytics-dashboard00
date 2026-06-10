@@ -10,7 +10,15 @@ st.set_page_config(
     page_icon="📊",
     layout="wide"
 )
+PRIMARY = "#6366F1"
+SECONDARY = "#06B6D4"
+SUCCESS = "#10B981"
+WARNING = "#F59E0B"
+DANGER = "#EF4444"
 
+BG = "#0F172A"
+CARD = "#1E293B"
+TEXT = "#F8FAFC"
 # ---------------- CUSTOM CSS ----------------
 st.markdown("""
 <style>
@@ -146,48 +154,7 @@ best_subject = max(
     }[x]
 )
 
-highest_corr = filtered_df[
-    ["math score", "reading score", "writing score"]
-].corr()
 
-reading_writing_corr = highest_corr.loc["reading score", "writing score"]
-
-male_avg = filtered_df[
-    filtered_df["gender"] == "male"
-]["average_score"].mean()
-
-female_avg = filtered_df[
-    filtered_df["gender"] == "female"
-]["average_score"].mean()
-
-prep_completed = filtered_df[
-    filtered_df["test preparation course"] == "completed"
-]["average_score"].mean()
-
-prep_none = filtered_df[
-    filtered_df["test preparation course"] == "none"
-]["average_score"].mean()
-
-st.info(f"""
-### 📊 Smart Insights
-
-✅ **{best_subject}** has the highest average score among all subjects.
-
-✅ Reading and Writing scores have a **strong positive correlation ({reading_writing_corr:.2f})**.
-
-✅ Female students average score: **{female_avg:.1f}**
-
-✅ Male students average score: **{male_avg:.1f}**
-
-✅ Students who completed the test preparation course scored **{prep_completed:.1f}** on average.
-
-✅ Students without preparation scored **{prep_none:.1f}** on average.
-
-✅ Test preparation improves performance by approximately **{prep_completed - prep_none:.1f} marks**.
-
-✅ Overall class average score is **{filtered_df["average_score"].mean():.1f}**.
-
-""")
 # ---------------- KPIs ----------------
 st.markdown("## 📊 Executive Summary")
 
